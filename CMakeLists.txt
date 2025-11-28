@@ -41,18 +41,15 @@ set(CMAKE_CXX_SCAN_FOR_MODULES ON) # Enable C++20/23 module scanning (if using m
 # ============================================================================
 # Source Files Configuration
 # ============================================================================
-# List all source files for the project
-# Organized in src/ directory with headers in src/header/
-set(SOURCES 
-    src/main.cpp
-    src/shaderClass.cpp
-    src/VAO.cpp
-    src/VBO.cpp
-    src/EBO.cpp
+# Automatically find all .cpp files in src/ directory
+# This eliminates the need to manually list each source file
+file(GLOB_RECURSE SOURCES 
+    "${CMAKE_SOURCE_DIR}/src/*.cpp"
 )
 
 # Include directories for header files
-include_directories(${CMAKE_SOURCE_DIR}/src/header)
+# Headers are in include/ directory (better practice for public APIs)
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
 # ============================================================================
 # Package Dependencies
