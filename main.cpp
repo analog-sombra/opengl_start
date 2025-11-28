@@ -1,6 +1,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <fmt/core.h>
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 {
@@ -9,7 +10,8 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 
 int main()
 {
-    std::cout << "Starting OpenGL Window\n";
+
+    fmt::print("Starting OpenGL Window\n");
     if (!glfwInit())
     {
         std::cerr << "Failed to initialize GLFW\n";
