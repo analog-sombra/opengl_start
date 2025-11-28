@@ -42,13 +42,17 @@ set(CMAKE_CXX_SCAN_FOR_MODULES ON) # Enable C++20/23 module scanning (if using m
 # Source Files Configuration
 # ============================================================================
 # List all source files for the project
-# Add additional .cpp files here as your project grows
+# Organized in src/ directory with headers in src/header/
 set(SOURCES 
-    main.cpp
-    # Add more source files here as needed:
-    # src/renderer.cpp
-    # src/window.cpp
+    src/main.cpp
+    src/shaderClass.cpp
+    src/VAO.cpp
+    src/VBO.cpp
+    src/EBO.cpp
 )
+
+# Include directories for header files
+include_directories(${CMAKE_SOURCE_DIR}/src/header)
 
 # ============================================================================
 # Package Dependencies
@@ -106,12 +110,23 @@ target_link_libraries(${PROJECT_NAME}
 # )
 
 # ============================================================================
+# Post-Build: Copy Shader Files
+# ============================================================================
+# Copy shader files to the build directory so the executable can find them
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/src/shader
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>
+    COMMENT "Copying shader files to build directory"
+)
+
+# ============================================================================
 # Build Instructions for Developers
 # ============================================================================
 # To build this project:
 # 1. Make sure vcpkg is installed and VCPKG_ROOT environment variable is set
 # 2. Install dependencies: vcpkg install fmt glfw3 glad
-# 3. Configure: cmake -S . -B build
-# 4. Build: cmake --build build
+# 3. Configure: cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+# 4. Build: cmake --build build --config Debug
 # 5. Run: ./build/Debug/Rocket.exe (on Windows)
 # ============================================================================

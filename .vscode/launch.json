@@ -10,7 +10,7 @@
       "name": "Launch",
       "program": "${workspaceFolder}/build/Debug/Rocket.exe",
       "args": [],
-      "cwd": "${workspaceFolder}"
+      "cwd": "${workspaceFolder}/build/Debug"
     }
   ]
 }
